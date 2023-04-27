@@ -15,18 +15,23 @@ strip = PixelStrip(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRI
 # Intialize the library (must be called once before other functions).
 strip.begin()
 
-# Turn on all LEDs red.
-color = Color(255, 0, 0)
-for i in range(strip.numPixels()):
-    strip.setPixelColor(i, color)
-strip.show()
-
-# Wait for 2 seconds
-time.sleep(2)
-
-# Turn off all LEDs.
-strip.clear()
-strip.show()
-
-# Clean up resources.
-strip.begin()
+# Loop indefinitely
+while True:
+    # Turn all even LEDs blue and all odd LEDs white
+    for i in range(strip.numPixels()):
+        if i % 2 == 0:
+            strip.setPixelColor(i, Color(0, 0, 255)) # Set to blue
+        else:
+            strip.setPixelColor(i, Color(255, 255, 255)) # Set to white
+    strip.show()
+    
+    # Wait for 3 seconds
+    time.sleep(3)
+    
+    # Turn off all LEDs
+    for i in range(strip.numPixels()):
+        strip.setPixelColor(i, Color(0, 0, 0)) # Set to black
+    strip.show()
+    
+    # Wait for 1 second
+    time.sleep(1)
